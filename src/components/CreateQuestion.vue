@@ -1,0 +1,91 @@
+<template>
+  <div class="card m-3">
+    <div class="card-header">New Question</div>
+    <div class="card-body">
+      <div class="my-3">
+        <label for="title" class="form-label">Title</label>
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          placeholder="1234 Main St"
+          v-model="title"
+        />
+      </div>
+
+      <div class="my-3">
+        <label for="body" class="form-label">Body</label>
+        <textarea
+          type="text"
+          class="form-control"
+          id="body"
+          placeholder="1234 Main St"
+          v-model="body"
+          rows="3"
+        ></textarea>
+      </div>
+
+      <div class="my-3">
+        <label for="tags" class="form-label">Tags</label>
+        <input
+          type="text"
+          class="form-control"
+          id="tags"
+          placeholder="1234 Main St"
+          v-model="tags"
+        />
+      </div>
+
+      <div class="mt-3">
+        <button
+          type="submit"
+          @click="createQuestion"
+          class="btn btn-primary float-end"
+        >
+          Create Question
+        </button>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      title: "",
+      body: "",
+      tags: "",
+    };
+  },
+
+  emits: ["new-question"],
+
+  methods: {
+    createQuestion: function () {
+      console.log(this.isValid) ; 
+      if (this.isValid)
+      {
+        this.$emit("new-question", this.title, this.body, this.tags);
+        this.title = "";
+        this.body = "";
+        this.tags = "";
+      }
+    },
+
+    isEmptyOrSpaces: function (str){
+      return str === null || str.match(/^ *$/) !== null;
+    }
+  },
+
+  computed : { 
+    isValid () { 
+      if ( this.isEmptyOrSpaces(this.title) && this.isEmptyOrSpaces(this.body) && this.isEmptyOrSpaces(this.tags)){
+        return false; 
+      }
+
+      return true; 
+    }
+  }
+};
+</script>
