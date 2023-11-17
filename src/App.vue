@@ -13,7 +13,6 @@
       ></question-component>
     </div>
     <div class="col-md-3 themed-grid-col">.col-md-3 
-      <modal-component></modal-component>
     </div>
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
   Launch static backdrop modal
@@ -43,14 +42,12 @@
 import CreateQuestion from "./components/CreateQuestion.vue";
 import QuestionComponent from "./components/QuestionComponent.vue";
 import HeaderComponent from "./components/HeaderComponent.vue";
-import ModalComponent from "./components/ModalComponent.vue"
 export default {
   name: "App",
   components: {
     CreateQuestion,
     QuestionComponent,
     HeaderComponent,
-    ModalComponent
   },
   data() {
     return {

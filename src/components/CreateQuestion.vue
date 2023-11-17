@@ -47,15 +47,18 @@
       </div>
     </div>
   </div>
+  <modal-component v-if="showModal" @closeModal="toggleModal"></modal-component>
 </template>
 
 <script>
+
 export default {
   data() {
     return {
       title: "",
       body: "",
       tags: "",
+      showModal: false
     };
   },
 
@@ -70,22 +73,29 @@ export default {
         this.title = "";
         this.body = "";
         this.tags = "";
+      } else {
+        this.showModal = true ; 
       }
+    },
+
+    toggleModal: function() { 
+      this.showModal = !this.showModal; 
     },
 
     isEmptyOrSpaces: function (str){
       return str === null || str.match(/^ *$/) !== null;
     }
+    
   },
 
   computed : { 
     isValid () { 
-      if ( this.isEmptyOrSpaces(this.title) && this.isEmptyOrSpaces(this.body) && this.isEmptyOrSpaces(this.tags)){
+      if ( this.isEmptyOrSpaces(this.title) || this.isEmptyOrSpaces(this.body) || this.isEmptyOrSpaces(this.tags)){
         return false; 
       }
 
       return true; 
-    }
+    },
   }
-};
+}
 </script>
