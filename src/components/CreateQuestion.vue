@@ -47,7 +47,24 @@
       </div>
     </div>
   </div>
-  <modal-component v-if="showModal" @closeModal="toggleModal"></modal-component>
+  <modal-component v-if="showModal" @closeModal="toggleModal" heading="Error">
+    <p class="text-danger">
+      The values in the form are invalid. <br />
+      Please enter correct Values
+    </p>
+    <template v-slot:footer="{ customClick }">
+      <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+              @click="customClick"
+            >
+              ok
+            </button>
+          </div>
+    </template>
+  </modal-component>
 </template>
 
 <script>
