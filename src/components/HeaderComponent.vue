@@ -27,6 +27,11 @@
           <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
           <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
           <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+          <li><router-link to="/profile" class="nav-link px-2 text-white">Profile</router-link></li>
+          <li><router-link to="/questions" class="nav-link px-2 text-white">Questions</router-link></li>
+
+          <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+
         </ul>
 
         <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
