@@ -54,20 +54,21 @@
     </p>
     <template v-slot:footer="{ customClick }">
       <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-              @click="customClick"
-            >
-              ok
-            </button>
-          </div>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+          @click="customClick"
+        >
+          ok
+        </button>
+      </div>
     </template>
   </modal-component>
 </template>
 
 <script>
+import axios from "axios";
 
 export default {
   data() {
@@ -75,7 +76,7 @@ export default {
       title: "",
       body: "",
       tags: "",
-      showModal: false
+      showModal: false,
     };
   },
 
@@ -83,36 +84,46 @@ export default {
 
   methods: {
     createQuestion: function () {
-      console.log(this.isValid) ; 
-      if (this.isValid)
-      {
-        this.$emit("new-question", this.title, this.body, this.tags);
-        this.title = "";
-        this.body = "";
-        this.tags = "";
+      console.log(this.isValid);
+      if (this.isValid) {
+        axios
+          .post("http://localhost:8000/api/questions", {
+            title: this.title,
+            body: this.body,
+            tags: this.tags,
+          })
+          .then((response) => {
+            this.$emit("new-question");
+            this.title = "";
+            this.body = "";
+            this.tags = "";
+          });
       } else {
-        this.showModal = true ; 
+        this.showModal = true;
       }
     },
 
-    toggleModal: function() { 
-      this.showModal = !this.showModal; 
+    toggleModal: function () {
+      this.showModal = !this.showModal;
     },
 
-    isEmptyOrSpaces: function (str){
+    isEmptyOrSpaces: function (str) {
       return str === null || str.match(/^ *$/) !== null;
-    }
-    
+    },
   },
 
-  computed : { 
-    isValid () { 
-      if ( this.isEmptyOrSpaces(this.title) || this.isEmptyOrSpaces(this.body) || this.isEmptyOrSpaces(this.tags)){
-        return false; 
+  computed: {
+    isValid() {
+      if (
+        this.isEmptyOrSpaces(this.title) ||
+        this.isEmptyOrSpaces(this.body) ||
+        this.isEmptyOrSpaces(this.tags)
+      ) {
+        return false;
       }
 
-      return true; 
+      return true;
     },
-  }
-}
+  },
+};
 </script>

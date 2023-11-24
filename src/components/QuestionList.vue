@@ -18,7 +18,6 @@ import CreateQuestion from "./CreateQuestion.vue";
 import QuestionComponent from "./QuestionComponent.vue";
 import axios from "axios";
 
-
 export default {
   components: {
     CreateQuestion,
@@ -26,35 +25,27 @@ export default {
   },
   data() {
     return {
-      questions: [
-        {
-          title: "How to get lorem ipsum to instantiate on multiple lines instead of 1 in VS Code?",
-          body: "In VS Code if I type lorem and then press enter it will generate a paragraph of lorem ipsum. The only problem is that the paragraph comes out as one very long line of text as opposed to several lines in the text editor. Is there a setting I can change so that it automatically generates my lorem ipsum on multiple lines?",
-          tags: "html visual-studio-code lorem-ipsum",
-        },
-      ],
+      questions: null,
     };
   },
   mounted() {
-    axios
-      .get("http://localhost:8000/api/questions")
-      .then((response) => {
-        this.questions = response.data;
-        console.log(response);
-        console.log(response.json());
-      })
-      .catch((response) => {
-        console.log(response);
-      });
+    this.loadQuestions(); 
   },
   methods: {
+    loadQuestions: function () {
+      axios
+        .get("http://localhost:8000/api/questions")
+        .then((response) => {
+          this.questions = response.data;
+          console.log(response);
+          console.log(response.json());
+        })
+        .catch((response) => {
+          console.log(response);
+        });
+    },
     addQuestion: function (title, body, tags) {
-      this.questions.push({
-        title,
-        body,
-        tags,
-      });
-      console.log(this.questions);
+      this.loadQuestions() ;
     },
   },
 };

@@ -6,7 +6,7 @@
         {{ question.body }}
       </p>
     <p>
-        <span class="badge rounded-pill text-bg-primary me-2" v-for="tag in tags" :key="tag">{{tag}}</span>
+        <span class="badge rounded-pill text-bg-primary me-2" v-for="tag in question.tags" :key="tag.id">{{tag.name}}</span>
     </p>
     </div>
   </div>
@@ -18,7 +18,6 @@ export default {
   props: ["question"],
   data() {
     return {
-        tags : this.question.tags.split(" ")
     };
   },
 };
