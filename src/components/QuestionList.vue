@@ -44,7 +44,7 @@ export default {
           console.log(response);
         });
     },
-    addQuestion: function (title, body, tags) {
+    addQuestion: function () {
       this.loadQuestions() ;
     },
   },

@@ -49,8 +49,7 @@
   </div>
   <modal-component v-if="showModal" @closeModal="toggleModal" heading="Error">
     <p class="text-danger">
-      The values in the form are invalid. <br />
-      Please enter correct Values
+       {{ errorMessage }}
     </p>
     <template v-slot:footer="{ customClick }">
       <div class="modal-footer">
@@ -77,6 +76,7 @@ export default {
       body: "",
       tags: "",
       showModal: false,
+      errorMessage: ' The values in the form are invalid. Please enter correct Values'
     };
   },
 
@@ -97,14 +97,20 @@ export default {
             this.title = "";
             this.body = "";
             this.tags = "";
+            console.log(response); 
+          })
+          .catch(() => { 
+            this.toggleModal('Something went wrong'); 
           });
       } else {
-        this.showModal = true;
+        // this.showModal = true;
+        this.toggleModal('The values in the form are invalid Please enter correct Values')
       }
     },
 
-    toggleModal: function () {
+    toggleModal: function (error) {
       this.showModal = !this.showModal;
+      this.errorMessage = error; 
     },
 
     isEmptyOrSpaces: function (str) {
