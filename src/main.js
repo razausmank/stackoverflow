@@ -15,6 +15,16 @@ const store = createStore({
         return { 
             views: 0 
         };
+    },
+    mutations: { 
+        incrementViews(state) { 
+            state.views++; 
+        }
+    },
+    getters: { 
+        views(state) {
+            return state.views ; 
+        }
     }
 }); 
 
