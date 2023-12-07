@@ -8,7 +8,7 @@
           type="text"
           class="form-control"
           id="title"
-          placeholder="1234 Main St"
+          placeholder="Title"
           v-model="title"
         />
       </div>
@@ -19,9 +19,9 @@
           type="text"
           class="form-control"
           id="body"
-          placeholder="1234 Main St"
+          placeholder="Body"
           v-model="body"
-          rows="3"
+          rows="4"
         ></textarea>
       </div>
 
@@ -31,7 +31,7 @@
           type="text"
           class="form-control"
           id="tags"
-          placeholder="1234 Main St"
+          placeholder="Tags"
           v-model="tags"
         />
       </div>
